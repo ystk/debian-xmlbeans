@@ -1,0 +1,2 @@
+version=3
+http://www.apache.org/dist/xmlbeans/source/xmlbeans-([\d.]+)-src.tgz debian debian/orig-tar.sh

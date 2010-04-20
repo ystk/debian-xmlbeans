@@ -1,0 +1,13 @@
+# XMLBeans has customization on JAM codebase
+#external/lib/jam*
+external/lib/jsr*
+external/lib/junit*
+external/lib/META-INF
+external/lib/oldxbean.jar
+external/lib/saxon*
+external/lib/xcresolver.zip
+# XMLBeans has customization on Piccolo codebase
+external/lib/piccolo_apache_dist_20040629.jar
+external/lib/piccolo_apache_dist_20040629_v2.jar
+external/lib/piccolo_apache_dist_20040711.jar
+samples/vxsdb/external/*

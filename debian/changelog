@@ -1,0 +1,58 @@
+xmlbeans (2.5.0-3) unstable; urgency=low
+
+  * Fix /usr/bin/validate filename conflict with wdg-html-validator:
+    - rename our "validate" to "xsdvalidate".
+    - d/README.Debian: describe this change wrt upstream.
+    (Closes: #578032)
+  * Remove d/README.source since we switched to source format 3.0
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 20 Apr 2010 23:29:37 +0200
+
+xmlbeans (2.5.0-2) unstable; urgency=low
+
+  [ Damien Raude-Morvan ]
+  * New xmlbeans package which contains CLI tools (Closes: #571245)
+  * TODO: build manpages for those tools
+
+  [ Torsten Werner ]
+  * Change maintainers into Maintainers.
+  * Switch to source format 3.0.
+  * Install tools into the xmlbeans packages.
+
+ -- Torsten Werner <twerner@debian.org>  Sun, 11 Apr 2010 21:55:26 +0200
+
+xmlbeans (2.5.0-1) unstable; urgency=low
+
+  * Import package in Debian based on Thierry Carrez <thierry.carrez@ubuntu.com>
+    work. Thanks Thierry! (Closes: #567778)
+  * New upstream release.
+  * Bump Debhelper compat level to 7
+  * Update to Standards-Version 3.8.4:
+    - Move to java section
+    - Add Vcs-* fields to pkg-java svn repository
+  * Add debian/watch to track upstream releases
+  * Move ant and default-jdk to Build-Depends (needed for clean target)
+  * Use Quilt as patch system:
+    - Update debian/rules
+    - Add quilt to Build-Depends
+    - Update all patches
+    - Add debian/README.source
+  * Update and review of debian/copyright
+  * Install JARs in maven-repository
+    - Build-Depends on maven-repo-helper
+    - Use mh_installjar to install JARs
+    - Add a get-orig-pom target in debian/rules
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sun, 31 Jan 2010 19:49:55 +0100
+
+xmlbeans (2.4.0-0ubuntu2) jaunty; urgency=low
+
+  * Do not use bundled oldxbean.jar to build, build-dep on itself instead.
+
+ -- Thierry Carrez <thierry.carrez@ubuntu.com>  Thu, 19 Feb 2009 13:06:11 +0000
+
+xmlbeans (2.4.0-0ubuntu1) jaunty; urgency=low
+
+  * Initial release
+
+ -- Thierry Carrez <thierry.carrez@ubuntu.com>  Tue, 17 Feb 2009 19:59:55 +0000

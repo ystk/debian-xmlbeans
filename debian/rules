@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/ant.mk
+
+POM_VERSION          := 2.4.0
+MAVEN_REPO           := http://repository.sonatype.org/service/local/repositories/central/content
+
+JAVA_HOME 	     := /usr/lib/jvm/default-java
+DEB_ANT_BUILD_TARGET := xbean.jar
+DEB_ANT_BUILDFILE    := build.xml
+DEB_JARS	     := ant-nodeps
+
+XMLBEANS_TOOLS       := dumpxsb inst2xsd scomp sdownload sfactor \
+                        svalidate validate xpretty xsd2inst xsdtree xstc
+
+install/libxmlbeans-java::
+	mh_installpoms -plibxmlbeans-java
+	mh_installjar -plibxmlbeans-java -nxmlbeans -l debian/poms/xmlbeans.xml build/lib/xbean.jar
+	mh_installjar -plibxmlbeans-java -nxmlbeans-qname -l debian/poms/qname.xml build/lib/xmlbeans-qname.jar
+	mh_installjar -plibxmlbeans-java -nxmlbeans_xpath -l debian/poms/xpath.xml build/lib/xbean_xpath.jar
+
+install/xmlbeans::
+	for TOOL in $(XMLBEANS_TOOLS); do \
+		dh_install -pxmlbeans bin/$$TOOL /usr/bin/; \
+	done
+	# Rename to fix filename conflict: See #578032
+	mv debian/xmlbeans/usr/bin/validate debian/xmlbeans/usr/bin/xsdvalidate
+
+
+clean::
+	-rm -rf debian/tmp
+
+get-orig-source:
+	uscan --force-download --rename
+
+get-orig-pom:
+	wget -O debian/poms/xmlbeans.xml $(MAVEN_REPO)/org/apache/xmlbeans/xmlbeans/$(POM_VERSION)/xmlbeans-$(POM_VERSION).pom
+	wget -O debian/poms/qname.xml $(MAVEN_REPO)/org/apache/xmlbeans/xmlbeans-qname/$(POM_VERSION)/xmlbeans-qname-$(POM_VERSION).pom
+	wget -O debian/poms/xpath.xml $(MAVEN_REPO)/org/apache/xmlbeans/xmlbeans-xpath/$(POM_VERSION)/xmlbeans-xpath-$(POM_VERSION).pom
+	perl -p -i -e 's/<version>$(POM_VERSION)/<version>$(DEB_UPSTREAM_VERSION)/' debian/poms/*.xml
+
