@@ -1,3 +1,12 @@
+xmlbeans (2.5.0-4) unstable; urgency=low
+
+  * d/rules Fix installation of Maven artifacts into /usr/share/maven-repo/.
+  * d/control: Drop JRE depends from libxmlbeans-java package.
+  * d/control: Bump Standards-Version to 3.9.2: no changes needed.
+  * d/control: Add Vcs-* headers.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sat, 25 Jun 2011 13:15:27 +0200
+
 xmlbeans (2.5.0-3) unstable; urgency=low
 
   * Fix /usr/bin/validate filename conflict with wdg-html-validator:

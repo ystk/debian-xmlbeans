@@ -16,9 +16,9 @@ XMLBEANS_TOOLS       := dumpxsb inst2xsd scomp sdownload sfactor \
 
 install/libxmlbeans-java::
 	mh_installpoms -plibxmlbeans-java
-	mh_installjar -plibxmlbeans-java -nxmlbeans -l debian/poms/xmlbeans.xml build/lib/xbean.jar
-	mh_installjar -plibxmlbeans-java -nxmlbeans-qname -l debian/poms/qname.xml build/lib/xmlbeans-qname.jar
-	mh_installjar -plibxmlbeans-java -nxmlbeans_xpath -l debian/poms/xpath.xml build/lib/xbean_xpath.jar
+	mh_installjar -plibxmlbeans-java -l debian/poms/xmlbeans.xml build/lib/xbean.jar
+	mh_installjar -plibxmlbeans-java -l debian/poms/qname.xml build/lib/xmlbeans-qname.jar
+	mh_installjar -plibxmlbeans-java -l debian/poms/xpath.xml build/lib/xbean_xpath.jar
 
 install/xmlbeans::
 	for TOOL in $(XMLBEANS_TOOLS); do \
