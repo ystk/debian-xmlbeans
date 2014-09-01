@@ -927,6 +927,9 @@ abstract class Saver
             if (options != null && options.hasOption(XmlOptions.LOAD_SAVE_CDATA_BOOKMARKS) )
                 _useCDataBookmarks = true;
 
+            if (options != null && options.hasOption(XmlOptions.SAVE_PRETTY_PRINT) )
+                _isPrettyPrint = true;
+
             _in = _out = 0;
             _free = 0;
 
@@ -1353,7 +1356,7 @@ abstract class Saver
                     count++;
                 else if (prevPrevChar == ']' && prevChar == ']' && ch == '>' )
                     hasCharToBeReplaced = true;
-                else if (isBadChar( ch ) || isEscapedChar( ch ))
+                else if (isBadChar( ch ) || isEscapedChar( ch ) || (!_isPrettyPrint && ch == '\r') )
                     hasCharToBeReplaced = true;
 
                 if (++i == n)
@@ -1421,6 +1424,8 @@ abstract class Saver
                         i = replace( i, "&gt;" );
                     else if (isBadChar( ch ))
                         i = replace( i, "?" );
+                    else if (!_isPrettyPrint && ch == '\r')
+                        i = replace( i, "&#13;" );
                     else if (isEscapedChar( ch ))
                         i = replace( i, _replaceChar.getEscapedString( ch ) );
                     else
@@ -1874,6 +1879,7 @@ abstract class Saver
         private int _cdataLengthThreshold = 32;
         private int _cdataEntityCountThreshold = 5;
         private boolean _useCDataBookmarks = false;
+        private boolean _isPrettyPrint = false;
 
         private int _lastEmitIn;
         private int _lastEmitCch;
@@ -2588,10 +2594,10 @@ abstract class Saver
                             _buf, 0, bbuf, off + chunk, len - chunk );
                     }
                 }
-//System.out.println("------------------------\nRead out of queue: Saver:2440 InputStreamSaver.read() bbuf   " + len + " bytes :\n" + new String(bbuf, off, len));
                 _out = (_out + len) % _buf.length;
                 _free += len;
 
+//System.out.println("------------------------\nRead out of queue: Saver:2440 InputStreamSaver.read() bbuf   " + len + " bytes :\n" + new String(bbuf, off, len));
                 return len;
             }
 
@@ -2630,9 +2636,9 @@ abstract class Saver
                     _in = _out = 0;
                 }
 
-                int chunk;
+                int chunk = _buf.length - _in;
 
-                if (_in <= _out || cbyte < (chunk = _buf.length - _in))
+                if (_in <= _out || cbyte < chunk)
                 {
                     System.arraycopy( buf, off, _buf, _in, cbyte );
                     _in += cbyte;
@@ -2652,7 +2658,7 @@ abstract class Saver
 
             void resize ( int cbyte )
             {
-                assert cbyte > _free;
+                assert cbyte > _free : cbyte + " !> " + _free;
 
                 int newLen = _buf == null ? _initialBufSize : _buf.length * 2;
                 int used = getAvailable();
@@ -2664,9 +2670,7 @@ abstract class Saver
 
                 if (used > 0)
                 {
-                    if (_out == _in)
-                        System.arraycopy( _buf, 0, newBuf, 0, used );
-                    else if (_in > _out)
+                    if (_in > _out)
                         System.arraycopy( _buf, _out, newBuf, 0, used );
                     else
                     {
@@ -2692,10 +2696,10 @@ abstract class Saver
 
             private static final int _initialBufSize = 4096;
 
-            int    _free;
-            int    _in;
-            int    _out;
-            byte[] _buf;
+            private int    _free;
+            private int    _in;
+            private int    _out;
+            private byte[] _buf;
         }
 
         private Locale             _locale;
@@ -4357,13 +4361,13 @@ abstract class Saver
 
         XmlDocumentProperties getDocProps ( ) { return _cur.getDocProps(); }
 
-        final static void spaces ( StringBuffer sb, int offset, int count )
+        static void spaces ( StringBuffer sb, int offset, int count )
         {
             while ( count-- > 0 )
                 sb.insert( offset, ' ' );
         }
 
-        final static void trim ( StringBuffer sb )
+        static void trim ( StringBuffer sb )
         {
             int i;
 

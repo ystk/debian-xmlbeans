@@ -19,8 +19,8 @@
     <property name="javac.source" value="1.4"/>
     <property name="javac.target" value="1.4"/>
 
-    <property name="version.base" value="2.5.0"/>
-    <property name="version.rc" value="-RC1"/>
+    <property name="version.base" value="2.6.0"/>
+    <property name="version.rc" value="-RC3"/>
 
     <!-- manifest entries -->
     <property name="manifest.name" value="org/apache/xmlbeans/"/>
@@ -243,7 +243,11 @@
     <!-- bootstrap target ============================================== -->
 
     <target name="bootstrap" depends="xbean">
+        <subant target="bootstrappass" inheritAll="true" buildpath="." failonerror="false"/>
+        <subant target="bootstrappass" inheritAll="true" buildpath="." failonerror="true"/>
+    </target>
 
+    <target name="bootstrappass" depends="xbean">
         <!-- after xbean.jar is built, move it out of the way and clean the project -->
         <tempfile property="bootstrap.jarfile" prefix="oldxbean" suffix=".jar"/>
         <move file="build/ar/xbean.jar" tofile="${bootstrap.jarfile}"/>
@@ -497,7 +501,9 @@
             <fileset dir="build/classes/toolschema"/>
             <fileset dir="build/classes/xsdschema"/>
             <fileset dir="build/classes/xmlschema"/>
-            <fileset dir="build/classes/store"/>
+            <fileset dir="build/classes/store">
+                <exclude name="org/w3c/dom/**" />
+            </fileset>
             <fileset dir="build/classes/saaj_api"/>
             <fileset dir="build/classes/xmlinputstream"/>
             <fileset dir="build/classes/marshal"/>
@@ -539,11 +545,10 @@
 
     <!-- xmlpublic target ============================================== -->
 
-    <target name="xmlpublic.classes" depends="dirs, xmlinputstream.classes, jsr173_1.0.jars">
+    <target name="xmlpublic.classes" depends="dirs, jsr173_1.0.jars">
         <mkdir dir="build/classes/xmlpublic"/>
-        <javac srcdir="src/xmlpublic" destdir="build/classes/xmlpublic" source="${javac.source}" target="${javac.target}" debug="on">
+        <javac srcdir="src/xmlpublic" sourcepath="src/xmlinputstream" destdir="build/classes/xmlpublic" source="${javac.source}" target="${javac.target}" debug="on">
             <classpath>
-                <pathelement location="build/classes/xmlinputstream"/>
                 <pathelement location="build/lib/jsr173_1.0_api.jar"/>
             </classpath>
         </javac>
@@ -1049,6 +1054,9 @@
         <ant antfile="${testbuild.file}" target="detailed"/>
     </target>
 
+    <target name="compile.run">
+        <ant antfile="${testbuild.file}" target="compile.run"/>
+    </target>
 
     <path id="test.compile.path">
         <pathelement location="build/classes/marshal"/>
