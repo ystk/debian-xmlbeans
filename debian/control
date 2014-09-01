@@ -2,14 +2,14 @@ Source: xmlbeans
 Section: java
 Priority: optional
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
-Uploaders: Damien Raude-Morvan <drazzib@debian.org>
-Build-Depends: cdbs, debhelper (>= 7), ant, default-jdk
+Uploaders: Damien Raude-Morvan <drazzib@debian.org>, Emmanuel Bourg <ebourg@apache.org>
+Build-Depends: cdbs, debhelper (>= 9), ant, default-jdk
 Build-Depends-Indep: ant-optional, libxmlbeans-java,
  libsaxonb-java, maven-repo-helper
-Standards-Version: 3.9.2
-Vcs-Svn: svn://svn.debian.org/svn/pkg-java/trunk/xmlbeans/
-Vcs-Browser: http://svn.debian.org/wsvn/pkg-java/trunk/xmlbeans/
-Homepage: http://xmlbeans.apache.org/
+Standards-Version: 3.9.5
+Vcs-Svn: svn://anonscm.debian.org/pkg-java/trunk/xmlbeans/
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-java/trunk/xmlbeans/
+Homepage: http://xmlbeans.apache.org
 
 Package: libxmlbeans-java
 Architecture: all

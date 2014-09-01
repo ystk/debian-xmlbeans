@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.xmlbeans</groupId>
     <artifactId>xmlbeans-qname</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 
     <name>XmlBeans</name>
     <description>Jar that enables XmlBeans to run under JDK 1.4</description>
@@ -57,44 +57,14 @@
         <developer>
             <name>Cezar Andrei</name>
             <id>cezar</id>
-            <email>cezar.andrei@no#spam#!bea.com</email>
+            <email>cezar.andrei@no#spam#!gma|l.com</email>
             <organization></organization>
         </developer>
 
         <developer>
-            <name>David Bau</name>
-            <id>dbau</id>
-            <email>david.bau@no#spam.google.com</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Patrick Calahan</name>
-            <id></id>
-            <email>pcal@no#spam.bea.com</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Yana Kadiyska</name>
-            <id></id>
-            <email>ykadiysk@no#spam#!bea.com</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Ken Kress</name>
-            <id></id>
-            <email>ken@nos#pam.kress.org</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Kevin Krouse</name>
-            <id></id>
-            <email>kkrouse@n#osp#am.apache.org</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Laurence Moroney</name>
-            <id></id>
-            <email>laurence.moroney@nospa#m.reuters.com</email>
+            <name>Radu Preotiuc</name>
+            <id>radup</id>
+            <email>radupr@nos#pam.gm@il.com</email>
             <organization></organization>
         </developer>
         <developer>
@@ -104,36 +74,17 @@
             <organization></organization>
         </developer>
         <developer>
-            <name>Cliff Schmidt</name>
-            <id></id>
-            <email>cliffschmidt@n#osp#am!gmail.com</email>
+            <name>Wing Yew Poon</name>
+            <id>wpoon</id>
+            <email>wing-yew.poon@nos#pam.oracle.com</email>
             <organization></organization>
         </developer>
         <developer>
-            <name>Dutta Satadip</name>
-            <id></id>
-            <email>s-dutta@no#spam.sbcglobal.net</email>
+            <name>Jacob Danner</name>
+            <id>jdanner</id>
+            <email>jacob.danner@nos#pam.oracle.com</email>
             <organization></organization>
         </developer>
-        <developer>
-            <name>Eric Vasilik</name>
-            <id></id>
-            <email>eric@nos#pam.vasilik.com</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>David Waite</name>
-            <id></id>
-            <email>dwaite@no#spam.apache.org</email>
-            <organization></organization>
-        </developer>
-        <developer>
-            <name>Scott Ziegler</name>
-            <id></id>
-            <email>scott.ziegler@n#ospam.bea.com</email>
-            <organization></organization>
-        </developer>
-
     </developers>
 
     <dependencies>

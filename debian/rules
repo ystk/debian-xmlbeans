@@ -3,8 +3,8 @@
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/ant.mk
 
-POM_VERSION          := 2.4.0
-MAVEN_REPO           := http://repository.sonatype.org/service/local/repositories/central/content
+POM_VERSION          := 2.6.0
+MAVEN_REPO           := http://repo1.maven.org/maven2/
 
 JAVA_HOME 	     := /usr/lib/jvm/default-java
 DEB_ANT_BUILD_TARGET := xbean.jar
@@ -29,6 +29,7 @@ install/xmlbeans::
 
 
 clean::
+	mh_clean
 	-rm -rf debian/tmp
 
 get-orig-source:

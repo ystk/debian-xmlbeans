@@ -13,7 +13,7 @@ Forwarded: not-needed
      </target>
  
      <!-- bootstrap target ============================================== -->
-@@ -483,7 +483,7 @@
+@@ -487,7 +487,7 @@
                   typeimpl.classes, xmlcomp.classes,
                   store.classes, saaj_api.classes,
                   marshal.classes, xpath.classes, oldxbean.jar, xsdschema.classes,
@@ -22,22 +22,21 @@ Forwarded: not-needed
                   piccolo.classes, tools.classes, jamsupport.classes">
          <jar jarfile="build/lib/xbean.jar" index="true">
              <fileset dir="build/classes/xmlpublic"
-@@ -539,12 +539,12 @@
+@@ -545,11 +545,11 @@
  
      <!-- xmlpublic target ============================================== -->
  
--    <target name="xmlpublic.classes" depends="dirs, xmlinputstream.classes, jsr173_1.0.jars">
-+    <target name="xmlpublic.classes" depends="dirs, xmlinputstream.classes">
+-    <target name="xmlpublic.classes" depends="dirs, jsr173_1.0.jars">
++    <target name="xmlpublic.classes" depends="dirs">
          <mkdir dir="build/classes/xmlpublic"/>
-         <javac srcdir="src/xmlpublic" destdir="build/classes/xmlpublic" source="${javac.source}" target="${javac.target}" debug="on">
+         <javac srcdir="src/xmlpublic" sourcepath="src/xmlinputstream" destdir="build/classes/xmlpublic" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath>
-                 <pathelement location="build/classes/xmlinputstream"/>
 -                <pathelement location="build/lib/jsr173_1.0_api.jar"/>
 +                <pathelement location="/usr/share/java/geronimo-stax-1.0-spec.jar"/>
              </classpath>
          </javac>
  
-@@ -581,7 +581,7 @@
+@@ -586,7 +586,7 @@
          <mkdir dir="build/classes/typestore"/>
          <javac srcdir="src/typestore" destdir="build/classes/typestore" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath>
@@ -46,7 +45,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
                  <pathelement location="build/classes/common"/>
-@@ -592,11 +592,11 @@
+@@ -597,11 +597,11 @@
  
      <!-- common target ============================================= -->
  
@@ -60,7 +59,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
              </classpath>
-@@ -634,7 +634,7 @@
+@@ -639,7 +639,7 @@
  
      <target name="typeimpl.classes" depends="dirs, store.classes,
          repackage.classes, xmlpublic.classes, typeholder.template, typestore.classes, xsdschema.classes,
@@ -69,7 +68,7 @@ Forwarded: not-needed
          <mkdir dir="build/classes/typeimpl"/>
          <javac destdir="build/classes/typeimpl" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath>
-@@ -650,7 +650,7 @@
+@@ -655,7 +655,7 @@
                  <pathelement location="build/classes/xmlschema"/>
                  <pathelement location="build/classes/toolschema"/>
                  <pathelement location="build/classes/jam"/>
@@ -78,7 +77,7 @@ Forwarded: not-needed
              </classpath>
  
              <src path="src/typeimpl"/>
-@@ -676,7 +676,7 @@
+@@ -681,7 +681,7 @@
          <mkdir dir="build/classes/xmlcomp"/>
          <javac srcdir="src/xmlcomp" destdir="build/classes/xmlcomp" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath>
@@ -87,7 +86,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
                  <pathelement location="build/classes/common"/>
-@@ -692,11 +692,11 @@
+@@ -697,11 +697,11 @@
  
      <!-- marshal target =============================================== -->
  
@@ -101,7 +100,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/configschema"/>
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
-@@ -738,7 +738,7 @@
+@@ -743,7 +743,7 @@
          <javac srcdir="src/store" destdir="build/classes/store" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath id="store.compile.path">
                  <pathelement location="build/classes/typestore"/>
@@ -110,7 +109,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
                  <pathelement location="build/classes/common"/>
-@@ -757,7 +757,7 @@
+@@ -762,7 +762,7 @@
          <javac srcdir="src/tools" destdir="build/classes/tools" source="${javac.source}" target="${javac.target}" debug="on">
              <classpath id="tools.compile.path">
                  <pathelement location="build/classes/typestore"/>
@@ -119,7 +118,7 @@ Forwarded: not-needed
                  <pathelement location="build/classes/xmlinputstream"/>
                  <pathelement location="build/classes/xmlpublic"/>
                  <pathelement location="build/classes/common"/>
-@@ -779,13 +779,13 @@
+@@ -784,13 +784,13 @@
  
      <path id="bootstrap.run.path">
          <pathelement location="build/private/lib/oldxbean.jar"/>
@@ -135,7 +134,7 @@ Forwarded: not-needed
      </path>
  
      <property name="bootstrap.compile.path" refid="bootstrap.compile.path"/>
-@@ -829,7 +829,7 @@
+@@ -834,7 +834,7 @@
          </condition>
      </target>
  
@@ -144,7 +143,7 @@ Forwarded: not-needed
          <delete dir="build/classes/xmlschema"/>
          <delete dir="build/src/xmlschema"/>
          <java classname="${bootstrap_schema_compiler}" classpathref="bootstrap.run.path" fork="true" failonerror="true">
-@@ -972,7 +972,7 @@
+@@ -977,7 +977,7 @@
  
      <!-- xpath target ============================================= -->
  
@@ -153,7 +152,7 @@ Forwarded: not-needed
          <mkdir dir="build/classes/xpath_xquery"/>
          <mkdir dir="build/classes/xpath_xquery/META-INF"/>
          <mkdir dir="build/classes/xpath_xquery/META-INF/services"/>
-@@ -991,8 +991,8 @@
+@@ -996,8 +996,8 @@
              <classpath id="xpath.compile.path">
                  <pathelement location="build/classes/xmlpublic"/>
                  <pathelement location="build/classes/store"/>
@@ -164,7 +163,7 @@ Forwarded: not-needed
              </classpath>
          </javac>
      </target>
-@@ -1053,19 +1053,19 @@
+@@ -1061,19 +1061,19 @@
      <path id="test.compile.path">
          <pathelement location="build/classes/marshal"/>
          <pathelement location="build/classes/common"/>
@@ -188,7 +187,7 @@ Forwarded: not-needed
          <mkdir dir="build/private/classes/drt"/>
          <javac
              destdir="build/private/classes/drt"
-@@ -1085,7 +1085,7 @@
+@@ -1093,7 +1093,7 @@
  
      <path id="scomp.run.path">
          <pathelement location="build/lib/xbean.jar"/>
@@ -197,7 +196,7 @@ Forwarded: not-needed
      </path>
  
      <target name="stsschema.check">
-@@ -1110,7 +1110,7 @@
+@@ -1118,7 +1118,7 @@
          </uptodate>
      </target>
  
@@ -206,7 +205,7 @@ Forwarded: not-needed
          <delete dir="build/private/jam"/>
          <mkdir dir="build/private/jam"/>
          <unjar src="external/lib/jam-0.1.0-src.jar" dest="build/private/jam"/>
-@@ -1133,7 +1133,7 @@
+@@ -1141,7 +1141,7 @@
              debug="on">
              <src path="build/private/jam/src_repackage"/>
              <classpath>
