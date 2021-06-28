@@ -1,3 +1,14 @@
+xmlbeans (2.6.0-2+deb8u1) jessie-security; urgency=high
+
+  * Non-maintainer upload by the ELTS team.
+  * Fix CVE-2021-23926:
+    The XML parsers used by XMLBeans did not set the properties needed to
+    protect the user from malicious XML input. Vulnerabilities include
+    possibilities for XML Entity Expansion attacks.
+  * Compile for source/target 1.5 in order to fix a compilation failure.
+
+ -- Markus Koschany <apo@debian.org>  Sun, 27 Jun 2021 23:25:54 +0200
+
 xmlbeans (2.6.0-2) unstable; urgency=medium
 
   * Upload to unstable

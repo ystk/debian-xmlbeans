@@ -1,2 +1,3 @@
 build-xml.patch
 scripts.patch
+CVE-2021-23926.patch
